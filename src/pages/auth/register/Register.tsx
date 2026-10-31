@@ -1,25 +1,24 @@
 
 "use client";
-import React, { useContext, useState } from 'react'
+import  { useState } from 'react'
 import {Person ,Envelope ,  Calendar, Key} from "@gravity-ui/icons";
 import {InputGroup, TextField, ListBox, Select, Button, toast} from '@heroui/react';
-import { useForm } from 'react-hook-form';
+import { useForm,Controller  } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerSchema } from '../../../Schema/register';
 import type { RegisterForm } from '../../../Interfaces/RgisterForm';
-import axios, { AxiosError, isAxiosError } from 'axios';
+import axios, { isAxiosError } from 'axios';
 import { RingLoader } from "react-spinners";
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../../Context/AuthContext';
 
 export default function Register() {
 let navigate= useNavigate();
 let [isLoading,setIsLoading]=useState(false)
-const {register,handleSubmit, setValue,formState:{errors}}=useForm({mode:"onChange",
+const {register,control,handleSubmit, setValue,formState:{errors}}=useForm({mode:"onChange",
   defaultValues:{
     name:"",
     username:"",
-    dateOfBirth:new Date(),
+    dateOfBirth:"",
     email:"",
     password:"",
     rePassword:"",
@@ -154,18 +153,26 @@ async function onSave(formData:RegisterForm){
 
 
 
-    <TextField className="w-full mb-0 "  type="date" {...register('dateOfBirth')}>
-      <InputGroup className="p-2 border
-      border-gray-300
-      focus-within:border-orbit-violet
-      border-2
-      focus-within:ring-0">
-        <InputGroup.Prefix  >
+    <Controller
+  name="dateOfBirth"
+  control={control}
+  render={({ field }) => (
+    <TextField
+      className="w-full mb-0"
+      type="date"
+      value={field.value}
+      onChange={field.onChange}
+      onBlur={field.onBlur}
+    >
+      <InputGroup className="p-2 border border-gray-300 border-2 focus-within:border-orbit-violet focus-within:ring-0">
+        <InputGroup.Prefix>
           <Calendar className="size-5 text-muted" />
         </InputGroup.Prefix>
-        <InputGroup.Input className="w-full "  />
+        <InputGroup.Input className="w-full" />
       </InputGroup>
     </TextField>
+  )}
+/>
 {errors.dateOfBirth && <small className='text-red-600 '>{errors.dateOfBirth?.message}</small>}
 
      <TextField className="w-full mt-2 mb-0"    type='password'>

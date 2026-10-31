@@ -1,14 +1,13 @@
-import { Button, Modal, toast } from '@heroui/react'
-import React, { useState } from 'react'
-import { FaPlus } from 'react-icons/fa'
-import CreatePost from '../CreatePost/CreatePost'
-import PostCard from './PostCard';
-import axios from 'axios';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { CircleCheck } from '@gravity-ui/icons';
+import { Modal } from "@heroui/react";
+import CreatePost from "../CreatePost/CreatePost";
+import type { Post } from "../../Interfaces/Post";
 
-export default function PostModal({postItem,onClose}) {
- const [isOpen, setIsOpen] =useState(false);
+
+type PostModalProps = {
+  postItem: Post;
+  onClose: () => void;
+};
+export default function PostModal({postItem,onClose}:PostModalProps) {
    /* function editPost(postId){
         console.log("edit Post function from modal"+postId);
           return axios.delete(`https://route-posts.routemisr.com/posts/${postId}`,

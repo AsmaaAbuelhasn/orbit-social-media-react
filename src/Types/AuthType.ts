@@ -1,13 +1,13 @@
 import type { AxiosResponse } from "axios";
 import type { ReactNode } from "react";
-import type { User } from "../Interfaces/Post";
+import type { MyData } from "../Interfaces/myData";
 
 export interface AuthContextType{
     children:ReactNode
 }
 interface ProfileResponse {
   data: {
-    user: User;
+    user: MyData;
   };
 }
 

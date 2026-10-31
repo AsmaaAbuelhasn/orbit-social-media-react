@@ -1,21 +1,22 @@
+
 import React from "react";
 import type { ReactNode } from "react";
-import { boolean, number } from "zod/v4";
 
 interface OrbitingCircleProps {
   children: ReactNode;
-  radius : number;
-  duration : number;
-  reverse : boolean;
-  path : boolean;
+  radius?: number;
+  duration?: number;
+  reverse?: boolean;
+  path?: boolean;
 }
+
 export default function OrbitingCircles({
   children,
   radius = 100,
   duration = 20,
   reverse = false,
   path = false,
-}:OrbitingCircleProps) {
+}: OrbitingCircleProps) {
   return (
     <div
       className="absolute left-1/2 top-1/2"
@@ -25,7 +26,6 @@ export default function OrbitingCircles({
         transform: "translate(-50%, -50%)",
       }}
     >
-      {/* Orbit path */}
       {path && (
         <div className="absolute inset-0 rounded-full border border-white/20" />
       )}

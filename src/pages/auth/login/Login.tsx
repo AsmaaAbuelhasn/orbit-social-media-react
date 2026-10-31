@@ -1,20 +1,19 @@
-import React, { useContext, useState } from 'react'
-import AppIntro from '../../../Components/AppIntro/AppIntro'
+import { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from '../../../Schema/login';
 import type { LoginForm } from './../../../Interfaces/loginForm';
 import axios, { isAxiosError } from 'axios';
 import { Button, InputGroup, TextField, toast } from '@heroui/react';
-import { Envelope, Key, Person } from '@gravity-ui/icons';
+import { Envelope, Key } from '@gravity-ui/icons';
 import { RingLoader } from 'react-spinners';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthContext';
 
 export default function Login() {
-  let navigate= useNavigate();
+let navigate= useNavigate();
 let [isLoading,setIsLoading]=useState(false)
-const {register,handleSubmit, setValue,formState:{errors}}=useForm({mode:"onChange",
+const {register,handleSubmit,formState:{errors}}=useForm({mode:"onChange",
   defaultValues:{
     email:"",
     password:""

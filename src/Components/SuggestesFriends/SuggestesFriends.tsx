@@ -5,10 +5,11 @@ import { FaSearch, FaUserPlus, FaUserCheck } from "react-icons/fa";
 import { AuthContext } from './../../Context/AuthContext';
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "@heroui/react";
+import type { Friend } from "../../Interfaces/Friends";
 
 export default function SuggestedFriends() {
   const [search, setSearch] = useState("");
-  const [followed, setFollowed] = useState<number[]>([]);
+  const [followed, setFollowed] = useState<string[]>([]);
   let {token}=useContext(AuthContext)
   const query= useQueryClient()
 
@@ -17,7 +18,7 @@ export default function SuggestedFriends() {
         {headers:{token}}
     )
   }
-  let {data,isLoading,isError}=useQuery(
+  let {data}=useQuery(
     {queryFn:getSuggestedFriends,
         queryKey:['suggFriend']
     }
@@ -25,9 +26,9 @@ export default function SuggestedFriends() {
   console.log(data?.data.data.suggestions);
   
 
- const friends = data?.data?.data.suggestions ?? [];
+ const friends:Friend[] = data?.data?.data.suggestions ?? [];
 
-const filteredFriends = friends.filter((friend) =>
+const filteredFriends = friends.filter((friend:Friend) =>
   `${friend.name} ${friend.username}`
     .toLowerCase()
     .includes(search.toLowerCase())
@@ -35,7 +36,7 @@ const filteredFriends = friends.filter((friend) =>
 
   
 
-  function followUser(id){
+  function followUser(id:string){
   return axios.put(`https://route-posts.routemisr.com/users/${id}/follow`,
     {},
     {headers:{token}}
@@ -43,7 +44,15 @@ const filteredFriends = friends.filter((friend) =>
   const {mutate}=useMutation({
     mutationFn:followUser,
     onError:()=>toast.danger("failed"),
-    onSuccess:()=>{toast.success('follow sucessfull')
+    onSuccess:(response,id)=>{
+        const isFollowing = response.data.data.following;
+
+      toast.success('follow sucessfull')
+        setFollowed((prev) =>
+    isFollowing
+      ? [...prev, id]
+      : prev.filter((userId) => userId !== id)
+  );
         query.invalidateQueries({queryKey:['suggFriend']})
     },
 
@@ -79,11 +88,12 @@ const filteredFriends = friends.filter((friend) =>
       <div className="space-y-4">
         {filteredFriends.length > 0 ? (
           filteredFriends.map((friend) => {
-            const isFollowed = followed.includes(friend.id);
+            const isFollowed = followed.includes(friend._id);
 
             return (
+            
               <div
-                key={friend.id}
+                key={friend._id}
                 className="flex items-center gap-3"
               >
                 {/* Avatar */}

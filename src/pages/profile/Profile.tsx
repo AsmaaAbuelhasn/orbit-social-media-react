@@ -19,6 +19,7 @@ import {
 } from "@tanstack/react-query";
 
 import PostCard from "../../Components/Posts/PostCard";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
   const [activeTab, setActiveTab] = useState("Posts");
@@ -242,7 +243,7 @@ export default function Profile() {
             </div>
 
             {/* Profile Actions */}
-            <div className="flex gap-2 sm:pb-2">
+            <Link to="../settings" className="flex gap-2 sm:pb-2">
               <Button className="bg-orbit-violet font-semibold text-white shadow-sm hover:bg-orbit-ink">
                 <FaEdit />
                 Edit Profile
@@ -265,7 +266,7 @@ export default function Profile() {
               >
                 <FaEllipsisH />
               </Button>
-            </div>
+            </Link>
           </div>
 
           {/* User Details */}
@@ -296,8 +297,9 @@ export default function Profile() {
           <div className="mt-7 grid grid-cols-3 gap-3">
             {[
               [posts.length, "Posts"],
-              [user?.followers?.length ?? 0, "Followers"],
-              [user?.following?.length ?? 0, "Following"],
+              [user?.followersCount ?? 0, "Followers"],
+              [user?.followingCount ?? 0, "Following"],
+              
             ].map(([number, label]) => (
               <div
                 key={label}

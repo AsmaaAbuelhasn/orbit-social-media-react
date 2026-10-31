@@ -3,7 +3,6 @@ import { useContext, useState } from "react";
 import {
   FaHouse,
   FaCompass,
-  FaMessage,
   FaBell,
   FaPlus,
   FaBars,
@@ -17,6 +16,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthContext";
 import CreatePost from "../../CreatePost/CreatePost";
 import { Button, Modal } from "@heroui/react";
+
 
 export default function Navbar() {
   const [active, setActive] = useState("Home");
@@ -39,7 +39,7 @@ export default function Navbar() {
     setMenuOpen(false);
   }
 
-  function handleLinkClick(name) {
+  function handleLinkClick(name:string) {
     setActive(name);
     setMenuOpen(false);
     setDropOpen(false);

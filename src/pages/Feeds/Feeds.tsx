@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import CreatePost from '../../Components/CreatePost/CreatePost'
 import Sidebar from '../../Components/Layout/Sidebar/Sidebar'
 import Posts from '../../Components/Posts/Posts'
 import SuggestedFriends from '../../Components/SuggestesFriends/SuggestesFriends'
 
+type TabType = "Feed" | "My Posts" | "Community" | "Saved";
+
+
 export default function Feeds() {
-    const [activeTab, setActiveTab] = useState("Feed");
+const [activeTab, setActiveTab] = useState<TabType>("Feed");
 
 
   return (

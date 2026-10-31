@@ -23,8 +23,9 @@ export const routes=createBrowserRouter([
             {path:'profile', element:<ProtectedRoutes> <Profile/></ProtectedRoutes>  },
             {path:'notification', element:<ProtectedRoutes> <Notifications/></ProtectedRoutes>  },
             {path:"*",element:<Notfound/>},
-            {path:"posts/:id",element:<PostDetailes/>},
-            {path:"settings",element:<ProtectedRoutes> <Setting/></ProtectedRoutes> }
+            {path:"posts/:id",element:<ProtectedRoutes> <PostDetailes/></ProtectedRoutes>},
+            {path:"settings",element:<ProtectedRoutes> <Setting/></ProtectedRoutes> },
+            {path:"profile/settings",element:<ProtectedRoutes> <Setting/></ProtectedRoutes> }
             
     ]
     },

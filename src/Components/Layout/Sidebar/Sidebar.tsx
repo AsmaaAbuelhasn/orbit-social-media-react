@@ -6,8 +6,19 @@ import {
   FaRegBookmark,
   FaChevronRight,
 } from "react-icons/fa";
+import type { IconType } from "react-icons";
 
-const menuItems = [
+type TabType = "Feed" | "My Posts" | "Community" | "Saved";
+type SidebarProps = {
+  activeTab: TabType;
+  setActiveTab: (tab: TabType) => void;
+};
+type MenuItem = {
+  title: TabType;
+  subtitle: string;
+  icon: IconType;
+};
+const menuItems:MenuItem[] = [
   {
     title: "Feed",
     subtitle: "Latest posts",
@@ -30,7 +41,7 @@ const menuItems = [
   },
 ];
 
-export default function Sidebar({ activeTab, setActiveTab }) {
+export default function Sidebar({ activeTab, setActiveTab }:SidebarProps) {
   return (
     <aside className="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm hidden lg:block md:block">
 

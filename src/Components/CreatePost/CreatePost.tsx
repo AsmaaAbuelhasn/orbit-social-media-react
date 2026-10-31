@@ -13,7 +13,6 @@ import EmojiPicker from "emoji-picker-react";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "@heroui/react";
-import type { Post } from "../../Interfaces/Post";
 
 export interface CreatePostProps {
   postId?: string;
@@ -31,10 +30,9 @@ export default function CreatePost({postId,postBody ,postImage ,onClose,statues}
   const [showEmoji, setShowEmoji] = useState(false);
    let [imageURL,setImageURL]=useState(postImage??"");
    const queryClient=useQueryClient()
-   let [isLoading, setIsLoading]=useState(false)
    
    
-   let {mutate , isError , isPending }=useMutation({
+   let {mutate  }=useMutation({
     mutationFn: handlePost,
     mutationKey:['createpost'],
     onSuccess:function(){
@@ -95,17 +93,17 @@ if (!content.trim() && !file) {
     mutationFn:share,
     onSuccess:function(response){ 
       toast.success("shared post sucessfuly")
+        queryClient.invalidateQueries({ queryKey: ["posts"] });
+
           console.log("Shared post response:", response.data);
+            onClose?.();
+
 
 
     },
     onError:function(){
       toast.danger("faild share")
-    },
-    onSettled:function(){
-      setIsLoading(false)
     }
-
   }
 )
 function share(){
@@ -207,7 +205,7 @@ function share(){
         {/* Publish Button */}
         <button
           type="button"
-          onClick={()=>statues==="share"?shareMutate:mutate}
+          onClick={()=>statues==="share"?shareMutate():mutate()}
           disabled={!content.trim()}
           className="w-full py-3 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 disabled:from-gray-300 disabled:to-gray-400 text-white font-bold shadow-md shadow-violet-200 transition-all duration-300 hover:shadow-lg disabled:shadow-none disabled:cursor-not-allowed"
         >

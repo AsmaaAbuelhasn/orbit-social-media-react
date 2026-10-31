@@ -7,8 +7,13 @@ import PostCard from "./PostCard";
 import Loader from "../Loader/Loader";
 import { toast } from "@heroui/react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+type TabType = "Feed" | "My Posts" | "Community" | "Saved";
+type PostsProps = {
+  activeTab: TabType;
+};
 
-export default function Posts({ activeTab }) {
+export default function Posts({ activeTab }: PostsProps) {
+
   const { token, userId } = useContext(AuthContext);
   const query = useQueryClient();
     // Get save posts
@@ -82,7 +87,7 @@ export default function Posts({ activeTab }) {
   console.log(dataSavePosts)
 
   // Delete post
-  function deletePost(postId) {
+  function deletePost(postId:string) {
     return axios.delete(
       `https://route-posts.routemisr.com/posts/${postId}`,
       {
@@ -114,7 +119,7 @@ export default function Posts({ activeTab }) {
   });
 
   //savePost 
-   function savePost(postId) {
+   function savePost(postId:string) {
     return axios.put(
       `https://route-posts.routemisr.com/posts/${postId}/bookmark`,{},
       {

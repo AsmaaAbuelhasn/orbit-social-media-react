@@ -94,51 +94,62 @@ export default function ChangePassword() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
 
-          <div>
-            <label className="mb-2 block text-sm font-semibold text-gray-700">
-              Current Password
-            </label>
+         <div className="relative">
+  <Input
+    type={showCurrent ? "text" : "password"}
+    placeholder="Enter current password"
+    value={currentPassword}
+    onChange={(e) => setCurrentPassword(e.target.value)}
+    required
+    className="w-full pr-10"
+  />
 
-            <Input
-              type="password"
-              placeholder="Enter current password"
-              value={currentPassword}
-              onChange={(e)=>setCurrentPassword(e.target.value)}
-              required
-              className="w-full"
-            />
-          </div>
+  <button
+    type="button"
+    onClick={() => setShowCurrent(!showCurrent)}
+    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+  >
+    {showCurrent ? <FaEyeSlash /> : <FaEye />}
+  </button>
+</div>
 
-          <div>
-            <label className="mb-2 block text-sm font-semibold text-gray-700">
-              New Password
-            </label>
+         <div className="relative">
+  <Input
+    type={showNew ? "text" : "password"}
+    placeholder="Enter new password"
+    value={newPassword}
+    onChange={(e) => setNewPassword(e.target.value)}
+    required
+    className="w-full pr-10"
+  />
 
-            <Input
-              type="password"
-              placeholder="Enter new password"
-              value={newPassword}
-              onChange={(e)=>setNewPassword(e.target.value)}
-              required
-              className="w-full"
-            />
-            
-          </div>
+  <button
+    type="button"
+    onClick={() => setShowNew(!showNew)}
+    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+  >
+    {showNew ? <FaEyeSlash /> : <FaEye />}
+  </button>
+</div>
 
-          <div>
-            <label className="mb-2 block text-sm font-semibold text-gray-700">
-              Confirm New Password
-            </label>
+         <div className="relative">
+  <Input
+    type={showConfirm ? "text" : "password"}
+    placeholder="Confirm new password"
+    value={confirmPassword}
+    onChange={(e) => setConfirmPassword(e.target.value)}
+    required
+    className="w-full pr-10"
+  />
 
-            <Input
-              type="password"
-              placeholder="Confirm new password"
-              value={confirmPassword}
-              onChange={(e)=>setConfirmPassword(e.target.value)}
-              required
-              className="w-full"
-            />
-          </div>
+  <button
+    type="button"
+    onClick={() => setShowConfirm(!showConfirm)}
+    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+  >
+    {showConfirm ? <FaEyeSlash /> : <FaEye />}
+  </button>
+</div>
 
           <div className="rounded-xl bg-violet-50 p-4 text-sm text-violet-700">
             Your new password should contain at least 8 characters.

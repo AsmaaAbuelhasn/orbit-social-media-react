@@ -1,17 +1,12 @@
 
 import { useState } from "react";
 import {
-  FaHeart,
-  FaComment,
-  FaUserPlus,
-  FaAt,
   FaBell,
   FaCheckDouble,
-  FaTrash,
-  FaEllipsis,
+  
 } from "react-icons/fa6";
 
-type Notification = {
+/*type Notification = {
   id: number;
   name: string;
   avatar: string;
@@ -19,7 +14,7 @@ type Notification = {
   time: string;
   type: "like" | "comment" | "follow" | "mention";
   read: boolean;
-};
+};*/
 
 
 export default function Notifications() {
@@ -28,25 +23,6 @@ export default function Notifications() {
   const [activeTab, setActiveTab] = useState<"all" | "unread">("all");
 
  
-
-
-
-  function getIcon(type: Notification["type"]) {
-    switch (type) {
-      case "like":
-        return <FaHeart className="text-pink-500" />;
-
-      case "comment":
-        return <FaComment className="text-blue-500" />;
-
-      case "follow":
-        return <FaUserPlus className="text-violet-600" />;
-
-      case "mention":
-        return <FaAt className="text-amber-500" />;
-    }
-  }
-
   return (
     <div className="min-h-screen bg-gray-50 px-3 py-8 sm:px-6 lg:px-8">
 

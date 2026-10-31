@@ -4,7 +4,6 @@ import { routes } from './Routes/AppRoutes'
 import { Toast } from '@heroui/react'
 import AuthContextProvider from './Context/AuthContext'
 import { QueryClient , QueryClientProvider } from '@tanstack/react-query';
-import CounterContextProvider from './Context/CounterContext'
 import {ReactQueryDevtools} from '@tanstack/react-query-devtools'
 
 const quaryClient = new QueryClient()
@@ -17,13 +16,11 @@ function App() {
     <QueryClientProvider client={quaryClient}>
       <ReactQueryDevtools initialIsOpen={true}/>
    <AuthContextProvider>
-   <CounterContextProvider>
    <Toast.Provider placement='top'/>
     
      <RouterProvider router={routes}>
 
      </RouterProvider>
-    </CounterContextProvider>
     
     </AuthContextProvider>
     </QueryClientProvider>

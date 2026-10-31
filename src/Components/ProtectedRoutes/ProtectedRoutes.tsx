@@ -1,7 +1,10 @@
-import React from 'react'
 import { Navigate } from 'react-router-dom';
+import type { ReactNode } from "react";
 
-export default function ProtectedRoutes({children}) {
+type ProtectedRoutesProps = {
+  children: ReactNode;
+};
+export default function ProtectedRoutes({children}:ProtectedRoutesProps) {
 
     let token=localStorage.getItem("token");
     if(!token){

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useState } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import AppIntro from '../../Components/AppIntro/AppIntro'
 

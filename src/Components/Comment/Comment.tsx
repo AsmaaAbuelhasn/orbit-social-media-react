@@ -1,4 +1,3 @@
-import React from 'react'
 import { FaEllipsisH } from 'react-icons/fa';
 import type { TopComment } from '../../Interfaces/Post';
 interface CommentProps {
