@@ -1,7 +1,8 @@
 import React from 'react'
 import { FaEllipsisH } from 'react-icons/fa';
+import  { TopComment } from '../../Interfaces/Post';
 
-export default function Comment({comment}) {
+export default function Comment({comment}:TopComment) {
   return <>
           <div className="flex items-center justify-between p-4">
             <div className="flex items-center gap-3">

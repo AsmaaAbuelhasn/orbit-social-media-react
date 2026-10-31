@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { FaEllipsisH, FaHeart, FaPlus, FaRegComment, FaRegHeart, FaShare } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
-import Comment from './../Comment/Comment';
+import Comment from '../Comment/Comment';
 import { Form } from 'react-hook-form';
 import axios, { isAxiosError } from 'axios';
 import { AuthContext } from '../../Context/AuthContext';
@@ -9,14 +9,14 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { RingLoader } from 'react-spinners';
 import { Button, Dropdown, Label, Modal, toast, useOverlayState } from '@heroui/react';
 import PostModal from './PostModal';
-import { CircleCheck } from '@gravity-ui/icons';
 import CreatePost from '../CreatePost/CreatePost';
 import type { Post } from '../../Interfaces/Post';
+import type { TopComment } from './../../Interfaces/Post';
 
 
 interface PostCardProps {
   postItem: Post;
-  allComments: any[];
+  allComments: TopComment[];
   deletePost: (postId: string) => void;
   savedPost?: (postId: string) => void;
 }
@@ -28,15 +28,11 @@ const [showComments, setShowComments] = useState(false);
 let [isLoading, setIsLoading]=useState(false)
 let {token,userId} =useContext(AuthContext)
 const query = useQueryClient();
- const [selectedPostItem, setSelectedPostItem] = useState<string | null>(null);
-  const state = useOverlayState();
+const [selectedPostItem, setSelectedPostItem] = useState<Post | null>(null);
    const [openModel , setOpenModel]=useState(false);
-   const[statues,setstatues]=useState("share")
+const [statues] = useState<"share" | "edit" | "create">("share");
 
 
-const handleLike = () => {
-setLiked(!liked);
-setLikes((prev:number) => (liked ? prev - 1 : prev + 1));}
 
 
 let {mutate,error}=useMutation(
@@ -303,7 +299,7 @@ function SelectAction(key:React.Key,postItem:Post){
             </button>
 
              <Modal  isOpen={openModel} onOpenChange={setOpenModel}>
-                  <Button variant="white"
+                  <Button variant="secondary"
                   className="flex w-full h-full items-center justify-center gap-2 py-3 rounded-xl text-gray-600 hover:bg-gray-50 transition"
             >
               <button></button>

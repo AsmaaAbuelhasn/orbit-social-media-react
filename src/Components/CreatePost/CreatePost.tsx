@@ -50,13 +50,16 @@ export default function CreatePost({postId,postBody ,postImage ,onClose,statues}
    })
 
   function handlePost() {
-    if (!content.trim()) return;
+    const file = imageContent.current?.files?.[0];
+
+if (!content.trim() && !file) {
+  return Promise.reject(new Error("Post content or image is required"));
+}
     console.log({ content });
     console.log(imageContent.current?.files?.[0]);
     let formData=new FormData()
     formData.append("body",content)
 
-  const file = imageContent.current?.files?.[0];
 
   if (file) {
     formData.append("image", file);
