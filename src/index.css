@@ -1,0 +1,22 @@
+@import "tailwindcss";
+@import "@heroui/styles"; 
+
+@theme {
+  --color-orbit-violet: #534AB7;
+  --color-orbit-ink: #1E1B4B;
+  --color-orbit-lilac: #CECBF6;
+  --color-orbit-mint: #5DCAA5;
+  --color-orbit-coral: #F0997B;
+  --color-orbit-paper: #F8F7Fc;
+  --color-orbit-lead:#45556c
+  
+}
+.color{
+  background-color: #534AB7;
+  background-color: #1E1B4B;
+  background-color: #CECBF6;
+  background-color: #5DCAA5;
+  background-color: #F0997B;
+  background-color: #F8F7Fc;
+}
+
