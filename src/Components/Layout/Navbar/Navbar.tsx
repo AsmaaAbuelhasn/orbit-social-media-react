@@ -14,8 +14,8 @@ import {
 } from "react-icons/fa6";
 
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "./../../../Context/AuthContext";
-import CreatePost from "./../../CreatePost/CreatePost";
+import { AuthContext } from "../../../Context/AuthContext";
+import CreatePost from "../../CreatePost/CreatePost";
 import { Button, Modal } from "@heroui/react";
 
 export default function Navbar() {

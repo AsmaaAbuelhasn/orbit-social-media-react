@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
 import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom'
-import { AuthContext } from './../../Context/AuthContext';
+import { AuthContext } from '../../Context/AuthContext';
 import axios from 'axios';
-import PostCard from './../../Components/Posts/PostCard';
-import Loader from './../../Components/Loader/Loader';
+import PostCard from '../../Components/Posts/PostCard';
+import Loader from '../../Components/Loader/Loader';
 
 export default function PostDetailes() {
 

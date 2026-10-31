@@ -9,7 +9,7 @@ import Register from "../pages/auth/register/Register";
 import ProtectedRoutes from "../Components/ProtectedRoutes/ProtectedRoutes";
 import Notifications from './../pages/Notifications/Notifications';
 import Setting from './../pages/Setting/Setting';
-import PostDetailes from './../pages/PostDetails/PostDetailes';
+import PostDetailes from '../pages/PostDetails/PostDetailes';
 
 
 

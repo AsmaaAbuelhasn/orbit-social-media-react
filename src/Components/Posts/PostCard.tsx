@@ -1,13 +1,12 @@
 import React, { useContext, useState } from 'react'
-import { FaEllipsisH, FaHeart, FaPlus, FaRegComment, FaRegHeart, FaShare } from 'react-icons/fa'
+import { FaEllipsisH, FaHeart,  FaRegComment, FaRegHeart, FaShare } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
 import Comment from '../Comment/Comment';
-import { Form } from 'react-hook-form';
 import axios, { isAxiosError } from 'axios';
 import { AuthContext } from '../../Context/AuthContext';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { RingLoader } from 'react-spinners';
-import { Button, Dropdown, Label, Modal, toast, useOverlayState } from '@heroui/react';
+import { Button, Dropdown, Label, Modal, toast} from '@heroui/react';
 import PostModal from './PostModal';
 import CreatePost from '../CreatePost/CreatePost';
 import type { Post } from '../../Interfaces/Post';
@@ -16,8 +15,8 @@ import type { TopComment } from './../../Interfaces/Post';
 
 interface PostCardProps {
   postItem: Post;
-  allComments: TopComment[];
-  deletePost: (postId: string) => void;
+  allComments?: TopComment[];
+  deletePost?: (postId: string) => void;
   savedPost?: (postId: string) => void;
 }
 export default function PostCard({postItem , allComments,deletePost,savedPost}:PostCardProps) {
@@ -35,7 +34,7 @@ const [statues] = useState<"share" | "edit" | "create">("share");
 
 
 
-let {mutate,error}=useMutation(
+let {mutate}=useMutation(
   {
     mutationFn:addComment,
     onSuccess:function(){ 
@@ -97,7 +96,7 @@ function SelectAction(key:React.Key,postItem:Post){
   switch(key){
     case 'save-post':savedPost?.(postItem._id);  break;
     case 'edit-post': setSelectedPostItem(postItem);  break;
-    case 'delete-post': deletePost(postItem._id);  break;
+    case 'delete-post': deletePost?.(postItem._id);  break;
   }
   
 }
@@ -326,13 +325,15 @@ function SelectAction(key:React.Key,postItem:Post){
           {/* Top Comment */}
           
 
-         {allComments ? allComments.map((comment)=>
-         <Comment comment={comment}/>
-        ):postItem.topComment && (<Comment comment={postItem.topComment}/>
-
-         )
-            
-            }
+         {allComments && allComments.length > 0 ? (
+  allComments.map((comment) => (
+    <Comment key={comment._id} comment={comment} />
+  ))
+) : (
+  postItem.topComment && (
+    <Comment comment={postItem.topComment} />
+  )
+)}
             
           {/* Comment Input */}
           {showComments && (
