@@ -96,7 +96,8 @@ if (!content.trim() && !file) {
         queryClient.invalidateQueries({ queryKey: ["posts"] });
 
           console.log("Shared post response:", response.data);
-            onClose?.();
+                  onClose?.();
+
 
 
 

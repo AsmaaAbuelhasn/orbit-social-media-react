@@ -312,7 +312,8 @@ function SelectAction(key:React.Key,postItem:Post){
                       <Modal.Dialog className="sm:max-w-[700px] overflow-auto">
                         <Modal.CloseTrigger />
                         
-                          <CreatePost postBody={postItem.body} postImage={postItem.image} statues={statues} postId={postItem._id}/>
+                          <CreatePost postBody={postItem.body} postImage={postItem.image} statues={statues} postId={postItem._id}  onClose={() => setOpenModel(false)}
+/>
                         
                       </Modal.Dialog>
                     </Modal.Container>
