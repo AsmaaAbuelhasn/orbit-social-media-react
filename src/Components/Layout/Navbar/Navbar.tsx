@@ -16,6 +16,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthContext";
 import CreatePost from "../../CreatePost/CreatePost";
 import { Button, Modal } from "@heroui/react";
+import logo from "../../../assets/orbit-logo-full.svg";
+import userimage from "../../../assets/default-profile.png"
+
 
 
 export default function Navbar() {
@@ -55,7 +58,7 @@ export default function Navbar() {
           <div className="flex shrink-0 items-center">
             <Link to="/">
               <img
-                src="src/assets/orbit-logo-full.svg"
+                src={logo}
                 className="h-12 sm:h-14 md:h-17"
                 alt="Orbit Logo"
               />
@@ -117,7 +120,7 @@ export default function Navbar() {
                 onClick={() => setDropOpen(!dropOpen)}
               >
                 <img
-                  src="src/assets/default-profile.png"
+                  src={userimage}
                   alt="Profile"
                   className="h-10 w-10 rounded-full object-cover"
                 />
