@@ -298,8 +298,8 @@ function SelectAction(key:React.Key,postItem:Post){
             </button>
 
              <Modal  isOpen={openModel} onOpenChange={setOpenModel}>
-                  <Button variant="secondary"
-                  className="flex w-full h-full items-center justify-center gap-2 py-3 rounded-xl text-gray-600 hover:bg-gray-50 transition"
+                  <Button 
+                  className="flex w-full h-full items-center justify-center gap-2 py-3 rounded-xl bg-white text-gray-600 hover:bg-gray-50 transition"
             >
               <button></button>
               
