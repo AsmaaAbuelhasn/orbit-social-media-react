@@ -6,6 +6,8 @@ export interface AuthContextType{
 
 export interface AuthContextInterface{
     token: string | null;
+    userId:string | null
+    data: undefined,
     updateToken:(token:string)=>void
     removeToken:()=>void
 }

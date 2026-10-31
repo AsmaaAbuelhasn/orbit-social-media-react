@@ -1,56 +1,82 @@
-import { createContext, useEffect, useState, type ReactNode } from "react"
-import type {AuthContextInterface, AuthContextType } from "../Types/AuthType";
+
+import { createContext, useEffect, useState } from "react";
+import type { AuthContextInterface, AuthContextType } from "../Types/AuthType";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import type {User} from '../Interfaces/myData'
 import { jwtDecode } from "jwt-decode";
 
-export let AuthContext = createContext<AuthContextInterface>(
-  {
-    token:'',
-    updateToken(token:string){},
-    removeToken(){
-    }
+export let AuthContext = createContext<AuthContextInterface>({
+  token: null,
+  userId: "",
+  data: undefined,
+
+  updateToken() {},
+
+  removeToken() {},
 });
-export default function AuthContextProvider({children}:AuthContextType){
-  let [userId,setUserId]=useState("")
-    let [token,setToken]=useState(function(){return localStorage.getItem("token")});//lazy state initialization
-    function updateToken(token:string){
-        setToken(token)
-        localStorage.setItem("token",token)
+
+export default function AuthContextProvider({ children }: AuthContextType) {
+  const [userId, setUserId] = useState("");
+
+  // Lazy initialization
+  const [token, setToken] = useState<string | null>(() => {
+    return localStorage.getItem("token");
+  });
+
+  // Update Token
+  function updateToken(token: string) {
+    setToken(token);
+    localStorage.setItem("token", token);
+  }
+
+  // Remove Token
+  function removeToken() {
+    setToken(null);
+    localStorage.removeItem("token");
+    setUserId("");
+  }
+
+  // Decode Token
+  useEffect(() => {
+    if (token) {
+      try {
+        const decoded = jwtDecode<{ user: string }>(token);
+        setUserId(decoded.user);
+      } catch {
+        removeToken();
+      }
     }
-    function removeToken(){
-      localStorage.removeItem("token")
-    }
+  }, [token]);
 
-    function getMyProfile(){
-      return axios('https://route-posts.routemisr.com/users/profile-data',
-       { headers:{
-          token: token
-        }}
-      )
-     }
-   
-     useEffect(()=>{
-             if(token){
-         let decoded = jwtDecode(token);
-         console.log(decoded)
-         setUserId(decoded.user)
-         
-    
-     }
-     },[token])
+  // Get Profile
+  function getMyProfile() {
+    return axios.get(
+      "https://route-posts.routemisr.com/users/profile-data",
+      {
+        headers: {
+          token,
+        },
+      }
+    );
+  }
 
+  const { data } = useQuery({
+    queryKey: ["myProfile", token],
+    queryFn: getMyProfile,
+    enabled: !!token,
+  });
 
-      let {error , data}=useQuery({
-       queryKey:['myProfile'],
-       queryFn:getMyProfile,
-       
-      })
-
-  return(
-    <AuthContext.Provider value={{token,updateToken,removeToken,data,userId}}>
+  return (
+    <AuthContext.Provider
+      value={{
+        token,
+        userId,
+        data,
+        updateToken,
+        removeToken,
+      }}
+    >
       {children}
     </AuthContext.Provider>
-  )
+  );
 }

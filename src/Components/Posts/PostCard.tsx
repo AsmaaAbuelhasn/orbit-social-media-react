@@ -11,14 +11,19 @@ import { Button, Dropdown, Label, Modal, toast, useOverlayState } from '@heroui/
 import PostModal from './PostModal';
 import { CircleCheck } from '@gravity-ui/icons';
 import CreatePost from '../CreatePost/CreatePost';
+import type { Post } from '../../Interfaces/Post';
 
 
-
-export default function PostCard({postItem , allComments,deletePost,savedPost}) {
+interface PostCardProps {
+  postItem: Post;
+  allComments: any[];
+  deletePost: (postId: string) => void;
+  savedPost?: (postId: string) => void;
+}
+export default function PostCard({postItem , allComments,deletePost,savedPost}:PostCardProps) {
 const [commentContent , setCommentContent] = useState("")
 const [liked, setLiked] = useState(false);
 let [likes,setLikes]=useState(postItem.likes.length)
-let [shares,setShares]=useState(postItem.sharesCount.length)
 const [showComments, setShowComments] = useState(false);
 let [isLoading, setIsLoading]=useState(false)
 let {token,userId} =useContext(AuthContext)
@@ -90,11 +95,11 @@ function addLike(){
 
 
 
-function SelectAction(key,postItem){
+function SelectAction(key:React.Key,postItem:Post){
   console.log(key);
   console.log(postItem._id);
   switch(key){
-    case 'save-post':savedPost(postItem._id);  break;
+    case 'save-post':savedPost?.(postItem._id);  break;
     case 'edit-post': setSelectedPostItem(postItem);  break;
     case 'delete-post': deletePost(postItem._id);  break;
   }

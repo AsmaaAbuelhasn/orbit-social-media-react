@@ -52,7 +52,7 @@ export default function ChangePassword() {
     },
   });
 
-  function handleSubmit(e) {
+  function handleSubmit(e:any) {
     e.preventDefault();
 
     if (!currentPassword || !newPassword || !confirmPassword) {

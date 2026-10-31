@@ -13,8 +13,17 @@ import EmojiPicker from "emoji-picker-react";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "@heroui/react";
+import type { Post } from "../../Interfaces/Post";
 
-export default function CreatePost({postId,postBody ,postImage ,onClose,statues}) {
+export interface CreatePostProps {
+  postId?: string;
+  postBody?: string;
+  postImage?: string;
+  onClose?: () => void;
+  statues?: "share" | "edit" | "create";
+}
+
+export default function CreatePost({postId,postBody ,postImage ,onClose,statues}:CreatePostProps) {
   const imageInputId = useId();
   const [content, setContent] = useState(postBody??"");
   const imageContent =useRef<HTMLInputElement>(null)
@@ -65,13 +74,7 @@ export default function CreatePost({postId,postBody ,postImage ,onClose,statues}
       }
     )
   }
-  function updatePost(){
- return axios.post('https://route-posts.routemisr.com/posts',
-      formData,{
-        headers:{token}
-      }
-    )
-  }
+  
   function PreviewImage(){
     setImageURL("")
   const file = imageContent.current?.files?.[0];
@@ -201,7 +204,7 @@ function share(){
         {/* Publish Button */}
         <button
           type="button"
-          onClick={statues==="share"?shareMutate:mutate}
+          onClick={()=>statues==="share"?shareMutate:mutate}
           disabled={!content.trim()}
           className="w-full py-3 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 disabled:from-gray-300 disabled:to-gray-400 text-white font-bold shadow-md shadow-violet-200 transition-all duration-300 hover:shadow-lg disabled:shadow-none disabled:cursor-not-allowed"
         >
