@@ -1,52 +1,68 @@
-import  { useState } from 'react'
-import { NavLink, Outlet, useLocation } from 'react-router-dom'
-import AppIntro from '../../Components/AppIntro/AppIntro'
+
+import { NavLink, Outlet } from "react-router-dom";
+import AppIntro from "../../Components/AppIntro/AppIntro";
 
 export default function AuthLayOut() {
-let {pathname}=useLocation()
-const[mode,setMode]=useState(pathname)
-/*useEffect(()=>{
-  if(pathname=="/auth/login" || pathname=="/auth/signup") setMode(pathname)
-},[pathname])*/
+  return (
+    <main className="grid grid-cols-1 md:grid-cols-12 min-h-screen">
 
+      {/* Intro Section */}
+      <aside className="hidden md:block md:col-span-4">
+        <AppIntro />
+      </aside>
 
-  return <>
-  <main className=" grid grid-cols-12  min-h-screen">
-  <div className="hidden  md:block xl:block md:col-span-4 xl:col-span-4 ">
-  <AppIntro/>
-  </div>
-  
+      {/* Authentication Section */}
+      <section className="col-span-1 md:col-span-8 bg-orbit-paper
+        min-h-screen flex items-center justify-center
+        px-4 py-6 sm:px-6 md:px-8">
 
-  <section className=' rounded-xl bg-orbit-paper col-span-12 sm:col-span-12 md:col-span-8 lg:col-span-8'>
-    <div className="bg-white xl:w-1/2  sm:p-6 sm:w-3/4 rounded-2xl m-auto my-10 ">
-      <div className="flex mb-5 p-4 justify-around bg-orbit-paper rounded-2xl ">
+        {/* Form Card */}
+        <div className="w-full max-w-[520px] bg-white
+          rounded-2xl shadow-sm
+          p-4 sm:p-6 md:p-8">
 
-        <NavLink
-      to="/auth/login"
-      onClick={()=>setMode("/auth/login")}
-      className={`   rounded-lg p-2 w-full text-center font-extrabold text-[14px] transform ${mode=="/auth/login"||mode=="/auth/" ? "bg-orbit-ink text-orbit-paper" :"text-orbit-lead hover:text-orbit-ink "} `}>
-        LogIn
-      </NavLink>
-      
-        <NavLink
-      to="signup"
-       onClick={()=>setMode("/auth/signup")}
-      className={`   rounded-lg p-2 text-center w-full font-extrabold text-[14px] ${mode=="/auth/signup" ? "bg-orbit-ink text-orbit-paper" :"text-orbit-lead hover:text-orbit-ink"} `}>
-        SignUp
-      </NavLink>
-      </div>
+          {/* Login / Signup Tabs */}
+          <div className="flex gap-2 mb-6 p-1.5
+            bg-orbit-paper rounded-xl">
 
-      
-      <Outlet/>
-    </div>
+            <NavLink
+              to="/auth/login"
+              end
+              className={({ isActive }) =>
+                `flex-1 text-center rounded-lg py-3 px-2
+                font-extrabold text-sm transition-all duration-300
+                ${
+                  isActive
+                    ? "bg-orbit-ink text-orbit-paper shadow-sm"
+                    : "text-orbit-lead hover:text-orbit-ink"
+                }`
+              }
+            >
+              LogIn
+            </NavLink>
 
+            <NavLink
+              to="/auth/signup"
+              className={({ isActive }) =>
+                `flex-1 text-center rounded-lg py-3 px-2
+                font-extrabold text-sm transition-all duration-300
+                ${
+                  isActive
+                    ? "bg-orbit-ink text-orbit-paper shadow-sm"
+                    : "text-orbit-lead hover:text-orbit-ink"
+                }`
+              }
+            >
+              SignUp
+            </NavLink>
 
-  </section>
-  
-  
-    
+          </div>
 
-  </main>
- 
-  </>
+          {/* Login / Register Content */}
+          <Outlet />
+
+        </div>
+      </section>
+    </main>
+  );
 }
