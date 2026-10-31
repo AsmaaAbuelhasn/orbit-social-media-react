@@ -92,25 +92,16 @@ export default function Navbar() {
           <div className="hidden items-center gap-3 sm:flex">
 
             {/* Create Post */}
-            <Modal isOpen={openModel} onOpenChange={setOpenModel}>
-              <Button
-                variant="secondary"
-                onPress={() => setOpenModel(true)}
-                className="flex items-center gap-2 rounded-xl bg-orbit-violet px-3 py-3 text-xs font-bold text-white shadow-md shadow-violet-200 transition hover:-translate-y-0.5 hover:bg-orbit-ink md:px-4 md:text-sm"
-              >
-                Create Post
-                <FaPlus />
-              </Button>
+            <Button
+  variant="secondary"
+  onPress={() => setOpenModel(true)}
+                  className="flex items-center gap-2 rounded-xl bg-orbit-violet px-3 py-3 text-xs font-bold text-white shadow-md shadow-violet-200 transition hover:-translate-y-0.5 hover:bg-orbit-ink md:px-4 md:text-sm"
 
-              <Modal.Backdrop>
-                <Modal.Container>
-                  <Modal.Dialog className="max-h-[90vh] overflow-auto sm:max-w-[700px]">
-                    <Modal.CloseTrigger />
-                    <CreatePost onClose={() => setOpenModel(false)} />
-                  </Modal.Dialog>
-                </Modal.Container>
-              </Modal.Backdrop>
-            </Modal>
+>
+  Create Post
+  <FaPlus />
+</Button>
+            
 
             {/* Profile Dropdown */}
             <div className="relative">

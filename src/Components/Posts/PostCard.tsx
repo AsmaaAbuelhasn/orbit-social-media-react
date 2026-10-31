@@ -297,28 +297,30 @@ function SelectAction(key:React.Key,postItem:Post){
               <span className="font-medium">Comment</span>
             </button>
 
-             <Modal  isOpen={openModel} onOpenChange={setOpenModel}>
-                  <Button 
-                  className="flex w-full h-full items-center justify-center gap-2 py-3 rounded-xl bg-white text-gray-600 hover:bg-gray-50 transition"
-            >
-              <button></button>
-              
-              <FaShare />
-              <span className="font-medium">Share</span>
-            </Button>
-                  
-                  <Modal.Backdrop>
-                    <Modal.Container>
-                      <Modal.Dialog className="sm:max-w-[700px] overflow-auto">
-                        <Modal.CloseTrigger />
-                        
-                          <CreatePost postBody={postItem.body} postImage={postItem.image} statues={statues} postId={postItem._id}  onClose={() => setOpenModel(false)}
-/>
-                        
-                      </Modal.Dialog>
-                    </Modal.Container>
-                  </Modal.Backdrop>
-                </Modal>
+             <Modal isOpen={openModel} onOpenChange={setOpenModel}>
+  <Button
+    onPress={() => setOpenModel(true)}
+    className="flex w-full h-full items-center justify-center gap-2 py-3 rounded-xl bg-white text-gray-600 hover:bg-gray-50 transition"
+  >
+    <FaShare />
+    <span className="font-medium">Share</span>
+  </Button>
+
+  <Modal.Backdrop>
+    <Modal.Container>
+      <Modal.Dialog className="sm:max-w-[700px] overflow-auto">
+        <Modal.CloseTrigger />
+
+        <CreatePost
+          postBody=""
+          statues="share"
+          postId={postItem._id}
+        
+        />
+      </Modal.Dialog>
+    </Modal.Container>
+  </Modal.Backdrop>
+</Modal>
 
            
           </div>

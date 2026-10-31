@@ -110,7 +110,7 @@ if (!content.trim() && !file) {
 function share(){
   return axios.post( `https://route-posts.routemisr.com/posts/${postId}/share`,
     {
-      body: content.trim() || "Sharing this great post",
+      body: content.trim() || "",
     },
     {
       headers: {
@@ -151,12 +151,15 @@ function share(){
         {/* Text Area */}
         
         <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="What's on your mind ?"
-          rows={4}
-          className="w-full resize-none border-0 outline-none overflow-hidden relative text-gray-700 text-lg placeholder:text-gray-400 bg-transparent"
-        />
+  value={content}
+  onChange={(e) => {
+    setContent(e.target.value);
+  }}
+  onClick={(e) => e.stopPropagation()}
+  placeholder="What's on your mind?"
+  rows={4}
+  className="w-full resize-none border-0 outline-none text-gray-700 text-lg placeholder:text-gray-400 bg-transparent"
+/>
         {imageURL &&<div className="relative w-fit  block max-h-100  object-contain   "><img src={imageURL} alt="" className="w-100 h-100 " />
       <button className="absolute top-0 end-0 bg-white cursor-pointer p  " onClick={(()=>setImageURL(""))}><IoMdCloseCircle color="red" size={30}/></button>
        
