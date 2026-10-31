@@ -29,7 +29,6 @@ let {token,userId} =useContext(AuthContext)
 const query = useQueryClient();
 const [selectedPostItem, setSelectedPostItem] = useState<Post | null>(null);
    const [openModel , setOpenModel]=useState(false);
-const [statues] = useState<"share" | "edit" | "create">("share");
 
 
 
