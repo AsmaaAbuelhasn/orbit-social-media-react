@@ -43,8 +43,7 @@ const menuItems:MenuItem[] = [
 
 export default function Sidebar({ activeTab, setActiveTab }:SidebarProps) {
   return (
-    <aside className="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm hidden lg:block md:block">
-
+<aside className="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
       {/* Header */}
       <div className="mb-5 flex items-center gap-3 px-2 pt-1">
         <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 text-white shadow-md shadow-violet-200">

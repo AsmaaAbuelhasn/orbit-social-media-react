@@ -152,8 +152,9 @@ export default function Profile() {
     onSuccess: () => {
       toast.success("Profile photo updated successfully");
 
+
       queryClient.invalidateQueries({
-        queryKey: ["myProfile"],
+        queryKey: ["myProfile",token],
       });
     },
 
